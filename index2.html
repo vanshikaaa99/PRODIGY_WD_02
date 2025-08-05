@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: grey;
+
+        }
+
+        .box {
+            height: 150px;
+            width: 400px;
+            background-color: rgb(241, 236, 236);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px;
+            box-shadow: inset 0 0 40px rgba(125, 43, 202, 0.3);
+
+
+        }
+
+        .start {
+            background-color: rgb(8, 247, 59);
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bolder;
+            cursor: pointer;
+            padding: 4px;
+            width: 80px;
+        }
+
+
+        .stop {
+            background-color: rgb(245, 78, 13);
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bolder;
+            cursor: pointer;
+            padding: 4px;
+            width: 80px;
+        }
+
+        .reset {
+            background-color: rgb(35, 49, 173);
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bolder;
+            cursor: pointer;
+            padding: 4px;
+            width: 80px;
+        }
+
+
+        .button1 {
+            display: flex;
+            justify-content: center;
+            height: 55px;
+            width: 100px;
+            font-weight: bolder;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            padding-top: 5px;
+            font-size: xx-large;
+            text-shadow: 0cap;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+
+
+        .button-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            color: black;
+            background-color: rgb(215, 220, 235);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"><b></b>
+        <button class=button1> 00:00:00 </button>
+        <div class="button-row">
+            <button class="start">START</button>
+            <button class="stop">STOP</button>
+            <button class="reset">RESET</button>
+        </div>
+    </div>
+    <script>
+        let button1 = document.querySelector(".button1");
+        let start = document.querySelector(".start");
+        let stop = document.querySelector(".stop");
+        let reset = document.querySelector(".reset");
+
+
+        start.addEventListener("click", starttimer);
+        stop.addEventListener("click", stoptimer);
+        reset.addEventListener("click", resettimer);
+
+
+        let sec = 0;
+        let min = 0;
+        let hr = 0;
+        let interval;
+
+        let timer = false
+
+        function starttimer() {
+            if (!timer) {
+                timer = true;
+                interval = setInterval(myfunc, 1000);
+            }
+        }
+
+        function stoptimer() {
+            timer = false;
+            clearInterval(interval);
+        }
+
+
+        function resettimer() {
+            button1.innerHTML = "00:00:00";
+
+            clearInterval(interval);
+            timer = false;
+            hr = 0;
+            sec = 0;
+            min = 0;
+        }
+
+
+
+
+        function myfunc() {
+            if (timer == true) {
+                sec = sec + 1;
+            }
+
+
+
+
+            if (sec == 60) {
+                min = min + 1;
+                sec = 0;
+            }
+
+            if (min == 60) {
+                hr = hr + 1;
+                min = 0;
+                sec = 0;
+
+            }
+
+            let displaySec = sec < 10 ? "0" + sec : sec;
+            let displayMin = min < 10 ? "0" + min : min;
+            let displayHr = hr < 10 ? "0" + hr : hr;
+
+
+
+            button1.innerHTML =displayHr + ":" + displayMin + ":" + displaySec;
+
+        }
+
+
+    </script>
+
+
+
+</body>
+
+
+</html>
